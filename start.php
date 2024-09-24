@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 require "vendor/autoload.php";
 
-use app\bang\App;
+use app\bang\WorkerMan;
 
-(new App)->worker::runAll();
+(new WorkerMan)->worker::runAll();
