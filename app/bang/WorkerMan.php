@@ -13,7 +13,14 @@ use Workerman\Protocols\Http\Response;
 class WorkerMan
 {
     /**
-     * worker variable
+     * 工作路由 variable
+     *
+     * @var array
+     */
+    protected array $worker_routes = [];
+
+    /**
+     * 工作 variable
      *
      * @var Worker
      */
@@ -44,11 +51,16 @@ class WorkerMan
     protected function message(
         TcpConnection $connection,
         Request $request
-    ): void {
+    ): null {
         $path = $request->path();
+        $key = $request->method() . $path;
+
+        var_dump($path, $key);
         $status = 200; // 默认状态
 
-        
+
+
+        return null;
     }
 
     /**

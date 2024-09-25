@@ -18,10 +18,16 @@
         "php": ">=8.1.0",
         "workerman/workerman": "^4.1"
     },
+    "suggest": {
+        "ext-event": "为了更好的性能。"
+    },
     "autoload": {
         "psr-4": {
             "app\\": "app/"
-        }
+        },
+        "files": [
+            "./support/Helpers.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

@@ -2,10 +2,11 @@
 
 namespace app\routes;
 
-class Server {
+class Server
+{
 
     public function load()
     {
-        
+        return "hello";
     }
 }
