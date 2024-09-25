@@ -9,12 +9,12 @@ define("BASE_PATH", dirname(__DIR__));
  * @param string|false $path 路径
  * @return string
  */
-function base_path($path = ""): string
+function basePath($path = ""): string
 {
     if (false === $path) {
-        return run_path();
+        return runPath();
     }
-    return path_combine(BASE_PATH, $path);
+    return pathCombine(BASE_PATH, $path);
 }
 
 /**
@@ -22,9 +22,9 @@ function base_path($path = ""): string
  * @param string $path 拼接路径
  * @return string
  */
-function app_path(string $path = ""): string
+function appPath(string $path = ""): string
 {
-    return path_combine(BASE_PATH .
+    return pathCombine(BASE_PATH .
         DIRECTORY_SEPARATOR .
         "app", $path);
 }
@@ -35,15 +35,15 @@ function app_path(string $path = ""): string
  * @param string $path 拼接路径
  * @return string
  */
-function run_path(string $path = ""): string
+function runPath(string $path = ""): string
 {
     static $runPath = "";
     if (!$runPath) {
-        $runPath = is_phar() ?
+        $runPath = isPhar() ?
             dirname(Phar::running(false)) :
             BASE_PATH;
     }
-    return path_combine($runPath, $path);
+    return pathCombine($runPath, $path);
 }
 
 /**
@@ -51,9 +51,9 @@ function run_path(string $path = ""): string
  * @param string $path 拼接路径
  * @return string
  */
-function config_path(string $path = ""): string
+function configPath(string $path = ""): string
 {
-    return path_combine(BASE_PATH .
+    return pathCombine(BASE_PATH .
         DIRECTORY_SEPARATOR .
         "config", $path);
 }
@@ -64,9 +64,9 @@ function config_path(string $path = ""): string
  * @param string $path
  * @return string
  */
-function static_path(string $path = ""): string
+function staticPath(string $path = ""): string
 {
-    return path_combine(BASE_PATH .
+    return pathCombine(BASE_PATH .
         DIRECTORY_SEPARATOR .
         "static", $path);
 }
@@ -76,13 +76,13 @@ function static_path(string $path = ""): string
  * @param string $path
  * @return string
  */
-function runtime_path(string $path = ""): string
+function runtimePath(string $path = ""): string
 {
     static $runtimePath = '';
     if (!$runtimePath) {
-        $runtimePath = run_path('runtime');
+        $runtimePath = runPath('runtime');
     }
-    return path_combine($runtimePath, $path);
+    return pathCombine($runtimePath, $path);
 }
 
 /**
@@ -91,7 +91,7 @@ function runtime_path(string $path = ""): string
  * @param string $back 后面
  * @return string
  */
-function path_combine(string $front, string $back): string
+function pathCombine(string $front, string $back): string
 {
     return $front .
         ($back ? (DIRECTORY_SEPARATOR .
@@ -102,7 +102,7 @@ function path_combine(string $front, string $back): string
  * 是否 phar 包
  * @return bool
  */
-function is_phar(): bool
+function isPhar(): bool
 {
     return class_exists(Phar::class, false)
         && Phar::running();

@@ -17,7 +17,7 @@ class WorkerMan
      *
      * @var array
      */
-    protected array $worker_routes = [];
+    protected array $workerRoutes = [];
 
     /**
      * 工作 variable
