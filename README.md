@@ -38,6 +38,7 @@ www                 web部署目录
 ├─composer.json     composer 定义文件
 ├─LICENSE.txt       授权说明文件
 ├─README.md         README 文件
+├─index.php         入口执行文件
 ```
 
 ## 架构
