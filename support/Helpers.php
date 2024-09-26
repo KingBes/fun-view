@@ -1,5 +1,8 @@
 <?php
 
+use app\bang\WorkerMan;
+use app\bang\Config;
+
 // 项目基础路径
 define("BASE_PATH", dirname(__DIR__));
 
@@ -106,4 +109,15 @@ function isPhar(): bool
 {
     return class_exists(Phar::class, false)
         && Phar::running();
+}
+
+/**
+ * 获取配置信息
+ * @param string|null $key
+ * @param mixed $default
+ * @return array|mixed|null
+ */
+function config(string $key = null,mixed $default = null)
+{
+    return Config::get($key, $default);
 }

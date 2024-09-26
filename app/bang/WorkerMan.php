@@ -31,6 +31,8 @@ class WorkerMan
      */
     public function __construct()
     {
+        // 加载配置信息
+        Config::load(\configPath());
         // 开启工作
         $this->worker = new Worker("http://127.0.0.1:8787");
         $this->worker->onMessage = function (
@@ -54,8 +56,6 @@ class WorkerMan
     ): null {
         $path = $request->path();
         $key = $request->method() . $path;
-
-        var_dump($path, $key);
         $status = 200; // 默认状态
 
 
