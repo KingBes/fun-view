@@ -1,9 +1,9 @@
 {
-    "name": "kingbes/bangphp",
-    "description": "bang php Framework",
+    "name": "kingbes/bang",
+    "description": "bang php Template",
     "keywords": [
         "php",
-        "Framework",
+        "template",
         "bang"
     ],
     "license": "Apache2.0",
@@ -15,18 +15,17 @@
         }
     ],
     "require": {
-        "php": ">=8.1.0",
-        "workerman/workerman": "^4.1"
+        "php": ">=8.1.0"
     },
     "suggest": {
         "ext-event": "为了更好的性能。"
     },
     "autoload": {
         "psr-4": {
-            "app\\": "app/"
+            "Kingbes\\Bang\\": "src/"
         },
         "files": [
-            "./support/Helpers.php"
+            "./src/Function.php"
         ]
     },
     "minimum-stability": "dev",
