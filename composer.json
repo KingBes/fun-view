@@ -1,6 +1,6 @@
 {
     "name": "kingbes/fun-view",
-    "description": "Function View Template",
+    "description": "函 数 式 模 板 引 擎 。Function View Template.",
     "keywords": [
         "php",
         "template",
@@ -24,10 +24,5 @@
         "files": [
             "./src/Function.php"
         ]
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
     }
 }
