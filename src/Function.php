@@ -1,9 +1,8 @@
 <?php
 
-namespace Kingbes\Bang;
+namespace Kingbes\View;
 
-use Exception;
-use Kingbes\Bang\Template;
+use Kingbes\View\Template;
 
 function span(...$args): void
 {

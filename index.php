@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 require "vendor/autoload.php";
 
-use Kingbes\Bang\Template;
+use Kingbes\View\Template;
 
-use function Kingbes\Bang\h1;
-use function Kingbes\Bang\span;
-use function Kingbes\Bang\img;
+use function Kingbes\View\h1;
+use function Kingbes\View\span;
+use function Kingbes\View\img;
 
 /**
  * 视图

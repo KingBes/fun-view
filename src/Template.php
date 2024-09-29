@@ -1,6 +1,6 @@
 <?php
 
-namespace Kingbes\Bang;
+namespace Kingbes\View;
 
 class Template
 {
