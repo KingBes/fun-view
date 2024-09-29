@@ -1,2 +1,4 @@
-# Bang
+# FunView
+
+![](./001.png)
 
