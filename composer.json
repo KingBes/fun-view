@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kingbes\\View\\": "src/"
+            "Kingbes\\FunView\\": "src/"
         },
         "files": [
             "./src/Function.php"

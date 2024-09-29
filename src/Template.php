@@ -1,6 +1,6 @@
 <?php
 
-namespace Kingbes\View;
+namespace Kingbes\FunView;
 
 class Template
 {

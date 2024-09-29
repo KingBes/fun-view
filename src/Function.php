@@ -1,8 +1,8 @@
 <?php
 
-namespace Kingbes\View;
+namespace Kingbes\FunView;
 
-use Kingbes\View\Template;
+use Kingbes\FunView\Template;
 
 function span(...$args): void
 {
