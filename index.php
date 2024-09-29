@@ -8,6 +8,7 @@ use Kingbes\Bang\Template;
 
 use function Kingbes\Bang\h1;
 use function Kingbes\Bang\span;
+use function Kingbes\Bang\img;
 
 /**
  * 视图
@@ -20,7 +21,7 @@ $func = function () {
     });
 
     h1("world", ["style" => "color:red;", "id" => "1"]);
-    h1();
+    img(["src" => "https://unpkg.com/outeres/demo/carousel/720x360-1.jpg"]);
 };
 
 $Template = new Template;
