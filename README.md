@@ -2,6 +2,12 @@
 
 💎 函 数 式 模 板 引 擎 。Function View Template.
 
+composer
+
+```shell
+composer require kingbes/fun-view
+```
+
 ### 示例
 
 ```php
