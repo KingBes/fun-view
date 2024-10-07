@@ -15,15 +15,17 @@ require "../vendor/autoload.php";
 
 use Kingbes\FunView\Template;
 
-use function Kingbes\FunView\h1; // h1标签
-use function Kingbes\FunView\span; // span标签
-use function Kingbes\FunView\img; // img标签
-use function Kingbes\FunView\head;
-use function Kingbes\FunView\body;
-use function Kingbes\FunView\title;
-use function Kingbes\FunView\meta;
-use function Kingbes\FunView\div;
-use function Kingbes\FunView\script;
+use function Kingbes\FunView\{
+    h1,
+    span,
+    img,
+    head,
+    body,
+    title,
+    meta,
+    div,
+    script
+};
 
 /**
  * 视图

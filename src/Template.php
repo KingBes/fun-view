@@ -2,10 +2,23 @@
 
 namespace Kingbes\FunView;
 
-use Kingbes\FunView\Cache;
+use Kingbes\FunView\Tool;
 
 class Template
 {
+
+    /**
+     * 数组转css字符串 function
+     *
+     * @param array $arr
+     * @return string
+     */
+    public static function arrayToCss(array $arr): string
+    {
+        $Tool = new Tool;
+        return substr($Tool->arrToCss($arr), 1);
+    }
+
     /**
      * 转义属性 function
      *
