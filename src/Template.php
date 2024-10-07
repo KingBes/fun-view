@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kingbes\FunView;
 
 use Kingbes\FunView\Tool;

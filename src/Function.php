@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kingbes\FunView;
 
 use Kingbes\FunView\Template;
-use Kingbes\FunView\Tool;
 
 /**
  * head标签 function
