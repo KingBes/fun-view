@@ -1069,7 +1069,7 @@ function strong(...$args): void
  */
 function style(array $css): void
 {
-    Template::render("<style>" . Template::arrayToCss($css) . "<style>");
+    echo "<style>" . Template::arrayToCss($css) . "</style>";
 }
 
 /**

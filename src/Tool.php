@@ -13,13 +13,13 @@ class Tool
             // 如果有父选择器，则连接当前选择器
             $currentSelector = $parentSelector ? "$parentSelector $selector" : $selector;
             if (is_array($value)) {
-                $cssStr .= "}\n";
-                $cssStr .= "$currentSelector {\n";
+                $cssStr .= "}";
+                $cssStr .= "\n$currentSelector {\n";
                 $cssStr .= $this->arrToCss($value, $currentSelector);
             } else {
                 $cssStr .= "$selector:$value;\n";
             }
         }
-        return $cssStr;
+        return $cssStr . "}";
     }
 }

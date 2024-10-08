@@ -18,7 +18,7 @@ class Template
     public static function arrayToCss(array $arr): string
     {
         $Tool = new Tool;
-        return substr($Tool->arrToCss($arr), 1);
+        return preg_replace('/}+/', '}', substr($Tool->arrToCss($arr), 1));
     }
 
     /**
@@ -85,6 +85,9 @@ class Template
                     $strAttr = self::getAttr($args[1]);
                 } elseif (is_string($args[0]) && is_callable($args[1])) {
                     $strText = self::hsc($args[0]);
+                    $strFunc = self::render($args[1]);
+                } elseif (is_array($args[0]) && is_callable($args[1])) {
+                    $strAttr = self::getAttr($args[0]);
                     $strFunc = self::render($args[1]);
                 } else {
                     throw new \Exception("参数1优先字符串,参数2数组或方法");
