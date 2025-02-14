@@ -11,11 +11,26 @@ composer require kingbes/fun-view
 ### 示例
 
 ```php
-require "../vendor/autoload.php";
+require "./vendor/autoload.php";
 
 use Kingbes\FunView\Template;
 
+// 内容
+$tpl = new Template([
+    // 模板目录
+    "view_dir" =>  __DIR__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR
+]);
+
+return $tpl->fetch("index", ["num" => 3]);
+```
+
+index.php 模板：
+
+```php
 use function Kingbes\FunView\{
+    p,
+    hsc,
+    html,
     h1,
     span,
     img,
@@ -24,41 +39,44 @@ use function Kingbes\FunView\{
     title,
     meta,
     div,
+    style,
     script
 };
 
-/**
- * 视图
- */
-echo Template::fetch(function () {
-
-    head(function () {
-        meta(["charset" => "UTF-8"]);
+html(
+    head(
+        meta(["charset" => "UTF-8"]),
         meta([
             "name" => "viewport",
             "content" => "width=device-width, initial-scale=1.0"
-        ]);
-        title("fun-viee");
-    });
-
-    body(function () {
-
-        h1("下面是循环：");
-
-        for ($i = 0; $i < 5; $i++) {
-            div("循环：$i");
-        }
-
-        h1("hello", function () {
-            span("world");
-            span("->php");
-        });
-
-        h1("world", ["style" => "color:red;", "id" => "1"]);
-        img(["src" => "https://unpkg.com/outeres/demo/carousel/720x360-1.jpg"]);
-        script('alert("hello");');
-    });
-});
+        ]),
+        title("这个是个标题"),
+        style([
+            "p" => [
+                "color" => "blue",
+            ]
+        ])
+    ),
+    body(
+        p("hello world"),
+        h1("下面是循环<br/>："),
+        div(function () use ($num) {
+            $div = "";
+            for ($i = 0; $i < $num; $i++) {
+                $div .= div("循环：$i");
+            }
+            return $div;
+        }),
+        h1(
+            "world",
+            ["style" => "color:red;", "id" => "1"],
+            span(" hello")
+        ),
+        img(["src" => "https://unpkg.com/outeres/demo/carousel/720x360-1.jpg"]),
+        div(hsc("<h1>安全输出</h1>")),
+        script("alert('hello world')")
+    )
+);
 ```
 
 结果:
@@ -68,21 +86,28 @@ echo Template::fetch(function () {
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fun-viee</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>这个是个标题</title>
+        <style>
+                p {
+                        color: blue;
+                }
+        </style>
 </head>
 
 <body>
-    <h1>下面是循环：</h1>
-    <div>循环：0</div>
-    <div>循环：1</div>
-    <div>循环：2</div>
-    <div>循环：3</div>
-    <div>循环：4</div>
-    <h1>hello<span>world</span><span>-&gt;php</span></h1>
-    <h1 style="color:red;" id="1">world</h1><img src="https://unpkg.com/outeres/demo/carousel/720x360-1.jpg">
-    <script>alert("hello");</script>
+        <p>hello world</p>
+        <h1>下面是循环<br />：</h1>
+        <div>
+                <div>循环：0</div>
+                <div>循环：1</div>
+                <div>循环：2</div>
+        </div>
+        <h1 style="color:red;" id="1">world<span> hello</span></h1><img
+                src="https://unpkg.com/outeres/demo/carousel/720x360-1.jpg" />
+        <div>&lt;h1&gt;安全输出&lt;/h1&gt;</div>
+        <script>alert('hello world')</script>
 </body>
 
 </html>

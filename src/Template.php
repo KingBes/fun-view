@@ -4,144 +4,61 @@ declare(strict_types=1);
 
 namespace Kingbes\FunView;
 
-use Kingbes\FunView\Tool;
-
 class Template
 {
+    /**
+     * 模板变量
+     * @var array
+     */
+    protected array $data = [];
 
     /**
-     * 数组转css字符串 function
+     * 模板配置
      *
-     * @param array $arr
+     * @var array
+     */
+    protected array $config = [
+        'view_dir' => './views/'
+    ];
+
+    /**
+     * 构造函数
+     * @access public
+     * @param  array $config 模板参数
+     */
+    public function __construct(array $config = [])
+    {
+        $this->config = array_merge($this->config, $config);
+    }
+
+    /**
+     * 模板变量赋值
+     * @access public
+     * @param  array $vars 模板变量
+     * @return $this
+     */
+    public function assign(array $vars = []): static
+    {
+        $this->data = array_merge($this->data, $vars);
+        return $this;
+    }
+
+    /**
+     * 渲染模板 function
+     *
+     * @param string $template 模板名称
+     * @param array $vars 数据
      * @return string
      */
-    public static function arrayToCss(array $arr): string
+    public function fetch(string $template, array $vars = []): string
     {
-        $Tool = new Tool;
-        return preg_replace('/}+/', '}', substr($Tool->arrToCss($arr), 1));
-    }
-
-    /**
-     * 转义属性 function
-     *
-     * @param array $attr
-     * @return string
-     */
-    public static function getAttr(array $attr): string
-    {
-        $str = "";
-        foreach ($attr as $k => $v) {
-            $str .= " " . self::hsc($k)
-                . '="'
-                . self::hsc($v) . '"';
+        if ($vars) {
+            $this->data = array_merge($this->data, $vars);
         }
-        return $str;
-    }
-
-    /**
-     * htmlspecialchars function
-     *
-     * @param string $str
-     * @return string
-     */
-    public static function hsc(string $str): string
-    {
-        return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
-    }
-
-    /**
-     * 创建标签 function
-     *
-     * @param string $tagName 标签名
-     * @param boolean $tagType 单双标签
-     * @param boolean $is_hsc 是否安全输出
-     * @param [string|arrat|callable] ...$args
-     * @return void
-     */
-    public static function createTag(string $tagName, bool $tagType = true, bool $is_hsc = true, ...$args): void
-    {
-        $strText = '';
-        $strFunc = '';
-        $strAttr = '';
-
-        switch (count($args)) {
-            case 1:
-                if (is_string($args[0])) {
-                    $strText = $args[0];
-                    if ($is_hsc) {
-                        $strText = self::hsc($args[0]);
-                    }
-                } elseif (is_array($args[0])) {
-                    $strAttr = self::getAttr($args[0]);
-                } elseif (is_callable($args[0])) {
-                    $strFunc = self::render($args[0]);
-                } else {
-                    throw new \Exception("参数必须是 字符串、数组、函数");
-                }
-                break;
-            case 2:
-                if (is_string($args[0]) && is_array($args[1])) {
-                    $strText = self::hsc($args[0]);
-                    $strAttr = self::getAttr($args[1]);
-                } elseif (is_string($args[0]) && is_callable($args[1])) {
-                    $strText = self::hsc($args[0]);
-                    $strFunc = self::render($args[1]);
-                } elseif (is_array($args[0]) && is_callable($args[1])) {
-                    $strAttr = self::getAttr($args[0]);
-                    $strFunc = self::render($args[1]);
-                } else {
-                    throw new \Exception("参数1优先字符串,参数2数组或方法");
-                }
-                break;
-            case 3:
-                if (is_string($args[0]) && is_array($args[1]) && is_callable($args[2])) {
-                    $strText = self::hsc($args[0]);
-                    $strAttr = self::getAttr($args[1]);
-                    $strFunc = self::render($args[2]);
-                } else {
-                    throw new \Exception("参数1优先字符串,参数2优先数组,参数3是方法");
-                }
-                break;
-            default:
-                throw new \Exception("无效的参数数量");
-        }
-        if ($tagType) {
-            echo "<$tagName$strAttr>$strText$strFunc</$tagName>";
-        } else {
-            echo "<$tagName$strAttr />";
-        }
-    }
-
-    /**
-     * 渲染标签 function
-     *
-     * @param callable $tag
-     * @return string|false
-     */
-    public static function render(callable $tag): string|false
-    {
+        $template = $this->config['view_dir'] . $template . '.php';
+        extract($this->data, EXTR_SKIP);
         ob_start();
-        echo $tag();
-        return ob_get_clean();
-    }
-
-    /**
-     * 渲染视图 function
-     *
-     * @param callable $view
-     * @return string|false
-     */
-    public static function fetch(callable $view): string|false
-    {
-        ob_start();
-?>
-        <!DOCTYPE html>
-        <html>
-
-        <?php echo $view(); ?>
-
-        </html>
-<?php
+        include $template;
         return ob_get_clean();
     }
 }

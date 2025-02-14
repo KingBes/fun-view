@@ -22,4 +22,15 @@ class Tool
         }
         return $cssStr . "}";
     }
+
+    /**
+     * html输出 function
+     *
+     * @param string $str
+     * @return string
+     */
+    public static function hsc(string $str): string
+    {
+        return htmlspecialchars($str);
+    }
 }

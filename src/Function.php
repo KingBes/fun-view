@@ -4,1235 +4,1258 @@ declare(strict_types=1);
 
 namespace Kingbes\FunView;
 
-use Kingbes\FunView\Template;
+use Kingbes\FunView\Tags;
+
+/**
+ * 安全输出 function
+ *
+ * @param integer|string $text
+ * @return string
+ */
+function hsc(int|string $text): string
+{
+    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * html标签 function
+ *
+ * @param mixed ...$args
+ * @return void
+ */
+function html(mixed ...$args): void
+{
+    echo "<!DOCTYPE html>";
+    echo Tags::__callStatic("html", $args);
+}
 
 /**
  * head标签 function
  *
- * @param callable $callable 函数内容
- * @return void
+ * @param mixed ...$args
+ * @return string
  */
-function head(callable $callable): void
+function head(mixed ...$args): string
 {
-    Template::createTag("head", true, true, $callable);
+    return Tags::__callStatic("head", $args);
 }
 
 /**
  * meta标签 function
  *
  * @param array $attr 属性数组
- * @return void
+ * @return string
  */
-function meta(array $attr = []): void
+function meta(array $attr = []): string
 {
-    Template::createTag("meta", false, true, $attr);
+    return Tags::__callStatic("meta", [$attr]);
 }
 
 /**
  * 标题 function
  *
- * @param string $text 文本内容
- * @return void
+ * @param mixed $args 文本内容
+ * @return string
  */
-function title(string $text = ""): void
+function title(mixed ...$args): string
 {
-    Template::createTag("title", true, true, $text);
+    return Tags::__callStatic("title", $args);
 }
 
 /**
  * link function
  *
  * @param array $attr 属性数组
- * @return void
+ * @return string
  */
-function link(array $attr = []): void
+function link(array $attr = []): string
 {
-    Template::createTag("link", false, true, $attr);
+    return Tags::__callStatic("link", [$attr]);
 }
 
 /**
  * script function
  *
- * @param array $args
- * @return void
+ * @param mixed $args
+ * @return string
  */
-function script(...$args): void
+function script(...$args): string
 {
-    Template::createTag("script", true, false, ...$args);
+    return Tags::__callStatic("script", $args);
 }
 
 /**
  * body function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function body(...$args): void
+function body(mixed ...$args): string
 {
-    Template::createTag("body", true, true, ...$args);
+    return Tags::__callStatic("body", $args);
 }
 
 /**
  * span function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function span(...$args): void
+function span(mixed ...$args): string
 {
-    Template::createTag("span", true, true, ...$args);
+    return Tags::__callStatic("span", $args);
 }
 
 /**
  * h1 function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function h1(...$args): void
+function h1(mixed ...$args): string
 {
-    Template::createTag("h1", true, true, ...$args);
+    return Tags::__callStatic("h1", $args);
 }
 
 /**
  * h2 function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function h2(...$args): void
+function h2(mixed ...$args): string
 {
-    Template::createTag("h2", true, true, ...$args);
+    return Tags::__callStatic("h2", $args);
 }
 
 /**
  * h3 function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function h3(...$args): void
+function h3(mixed ...$args): string
 {
-    Template::createTag("h3", true, true, ...$args);
+    return Tags::__callStatic("h3", $args);
 }
 /**
  * h4 function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function h4(...$args): void
+function h4(mixed ...$args): string
 {
-    Template::createTag("h4", true, true, ...$args);
+    return Tags::__callStatic("h4", $args);
 }
 
 /**
  * h5 function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function h5(...$args): void
+function h5(mixed ...$args): string
 {
-    Template::createTag("h5", true, true, ...$args);
+    return Tags::__callStatic("h5", $args);
 }
 
 /**
  * h6 function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function h6(...$args): void
+function h6(mixed ...$args): string
 {
-    Template::createTag("h6", true, true, ...$args);
+    return Tags::__callStatic("h6", $args);
 }
 
 /**
  * img function
  *
  * @param array $attr 属性数组
- * @return void
+ * @return string
  */
-function img(array $attr = []): void
+function img(array $attr = []): string
 {
-    Template::createTag("img", false, true, $attr);
+    return Tags::__callStatic("img", [$attr]);
 }
 
 /**
  * div function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function div(...$args): void
+function div(mixed ...$args): string
 {
-    Template::createTag("div", true, true, ...$args);
+    return Tags::__callStatic("div", $args);
 }
 
 /**
  * a function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function a(...$args): void
+function a(mixed ...$args): string
 {
-    Template::createTag("a", true, true, ...$args);
+    return Tags::__callStatic("a", $args);
 }
 
 /**
  * abbr function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function abbr(...$args): void
+function abbr(mixed ...$args): string
 {
-    Template::createTag("abbr", true, true, ...$args);
+    return Tags::__callStatic("abbr", $args);
 }
 
 /**
  * address function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function address(...$args): void
+function address(mixed ...$args): string
 {
-    Template::createTag("address", true, true, ...$args);
+    return Tags::__callStatic("address", $args);
 }
 
 /**
  * area function
  *
  * @param array $attr 属性
- * @return void
+ * @return string
  */
-function area(array $attr = []): void
+function area(array $attr = []): string
 {
-    Template::createTag("area", false, true, $attr);
+    return Tags::__callStatic("area", [$attr]);
 }
 
 /**
  * article function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function article(...$args): void
+function article(mixed ...$args): string
 {
-    Template::createTag("article", true, true, ...$args);
+    return Tags::__callStatic("article", $args);
 }
 
 /**
  * aside function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function aside(...$args): void
+function aside(mixed ...$args): string
 {
-    Template::createTag("aside", true, true, ...$args);
+    return Tags::__callStatic("aside", $args);
 }
 
 /**
  * figure function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function figure(...$args): void
+function figure(mixed ...$args): string
 {
-    Template::createTag("figure", true, true, ...$args);
+    return Tags::__callStatic("figure", $args);
 }
 
 /**
  * figcaption function
  *
  * @param string $text
- * @return void
+ * @return string
  */
-function figcaption(string $text = ""): void
+function figcaption(string $text = ""): string
 {
-    Template::createTag("figcaption", true, true, $text);
+    return Tags::__callStatic("figcaption", [$text]);
 }
 
 /**
  * audio function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function audio(...$args): void
+function audio(mixed ...$args): string
 {
-    Template::createTag("audio", true, true, ...$args);
+    return Tags::__callStatic("audio", $args);
 }
 
 /**
  * b function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function b(...$args): void
+function b(mixed ...$args): string
 {
-    Template::createTag("b", true, true, ...$args);
+    return Tags::__callStatic("b", $args);
 }
 
 /**
  * base function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function base(array $attr = []): void
+function base(array $attr = []): string
 {
-    Template::createTag("base", false, true, $attr);
+    return Tags::__callStatic("base", [$attr]);
 }
 
 /**
  * bdi function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function bdi(...$args): void
+function bdi(mixed ...$args): string
 {
-    Template::createTag("bdi", true, true, ...$args);
+    return Tags::__callStatic("bdi", $args);
 }
 
 /**
  * bdo function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function bdo(...$args): void
+function bdo(mixed ...$args): string
 {
-    Template::createTag("bdo", true, true, ...$args);
+    return Tags::__callStatic("bdo", $args);
 }
 
 /**
  * blockquote function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function blockquote(...$args): void
+function blockquote(mixed ...$args): string
 {
-    Template::createTag("blockquote", true, true, ...$args);
+    return Tags::__callStatic("blockquote", $args);
 }
 
 /**
  * br function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function br(array $attr = []): void
+function br(array $attr = []): string
 {
-    Template::createTag("br", false, true, $attr);
+    return Tags::__callStatic("br", [$attr]);
 }
 
 /**
  * button function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function button(...$args): void
+function button(mixed ...$args): string
 {
-    Template::createTag("button", true, true, ...$args);
+    return Tags::__callStatic("button", $args);
 }
 
 /**
  * canvas function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function canvas(...$args): void
+function canvas(mixed ...$args): string
 {
-    Template::createTag("canvas", true, true, ...$args);
+    return Tags::__callStatic("canvas", $args);
 }
 
 /**
  * caption function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function caption(...$args): void
+function caption(mixed ...$args): string
 {
-    Template::createTag("caption", true, true, ...$args);
+    return Tags::__callStatic("caption", $args);
 }
 
 /**
  * cite function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function cite(...$args): void
+function cite(mixed ...$args): string
 {
-    Template::createTag("cite", true, true, ...$args);
+    return Tags::__callStatic("cite", $args);
 }
 
 /**
  * code function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function code(...$args): void
+function code(mixed ...$args): string
 {
-    Template::createTag("code", true, true, ...$args);
+    return Tags::__callStatic("code", $args);
 }
 
 /**
  * col function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function col(array $attr = []): void
+function col(array $attr = []): string
 {
-    Template::createTag("col", false, true, $attr);
+    return Tags::__callStatic("col", [$attr]);
 }
 
 /**
  * colgroup function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function colgroup(...$args): void
+function colgroup(mixed ...$args): string
 {
-    Template::createTag("colgroup", true, true, ...$args);
+    return Tags::__callStatic("colgroup", $args);
 }
 
 /**
  * table function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function table(...$args): void
+function table(mixed ...$args): string
 {
-    Template::createTag("table", true, true, ...$args);
+    return Tags::__callStatic("table", $args);
 }
 
 /**
  * data function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function data(...$args): void
+function data(mixed ...$args): string
 {
-    Template::createTag("data", true, true, ...$args);
+    return Tags::__callStatic("data", $args);
 }
 
 /**
  * datalist function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function datalist(...$args): void
+function datalist(mixed ...$args): string
 {
-    Template::createTag("datalist", true, true, ...$args);
+    return Tags::__callStatic("datalist", $args);
 }
 
 /**
  * option function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function option(...$args): void
+function option(mixed ...$args): string
 {
-    Template::createTag("option", true, true, ...$args);
+    return Tags::__callStatic("option", $args);
 }
 
 /**
  * dd function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function dd(...$args): void
+function dd(mixed ...$args): string
 {
-    Template::createTag("dd", true, true, ...$args);
+    return Tags::__callStatic("dd", $args);
 }
 
 /**
  * del function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function del(...$args): void
+function del(mixed ...$args): string
 {
-    Template::createTag("del", true, true, ...$args);
+    return Tags::__callStatic("del", $args);
 }
 
 /**
  * details function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function details(...$args): void
+function details(mixed ...$args): string
 {
-    Template::createTag("details", true, true, ...$args);
+    return Tags::__callStatic("details", $args);
 }
 
 /**
  * summary function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function summary(...$args): void
+function summary(mixed ...$args): string
 {
-    Template::createTag("summary", true, true, ...$args);
+    return Tags::__callStatic("summary", $args);
 }
 
 /**
  * dfn function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function dfn(...$args): void
+function dfn(mixed ...$args): string
 {
-    Template::createTag("dfn", true, true, ...$args);
+    return Tags::__callStatic("dfn", $args);
 }
 
 /**
  * dialog function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function dialog(...$args): void
+function dialog(mixed ...$args): string
 {
-    Template::createTag("dialog", true, true, ...$args);
+    return Tags::__callStatic("dialog", $args);
 }
 
 /**
  * dl function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function dl(...$args): void
+function dl(mixed ...$args): string
 {
-    Template::createTag("dl", true, true, ...$args);
+    return Tags::__callStatic("dl", $args);
 }
 
 /**
  * dt function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function dt(...$args): void
+function dt(mixed ...$args): string
 {
-    Template::createTag("dt", true, true, ...$args);
+    return Tags::__callStatic("dt", $args);
 }
 
 /**
  * em function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function em(...$args): void
+function em(mixed ...$args): string
 {
-    Template::createTag("em", true, true, ...$args);
+    return Tags::__callStatic("em", $args);
 }
 
 /**
  * embed function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function embed(array $attr = []): void
+function embed(array $attr = []): string
 {
-    Template::createTag("embed", false, true, $attr);
+    return Tags::__callStatic("embed", [$attr]);
 }
 
 /**
  * fencedframe function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function fencedframe(array $attr = []): void
+function fencedframe(array $attr = []): string
 {
-    Template::createTag("fencedframe", true, true, $attr);
+    return Tags::__callStatic("fencedframe", [$attr]);
 }
 
 /**
  * fieldset function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function fieldset(...$args): void
+function fieldset(mixed ...$args): string
 {
-    Template::createTag("fieldset", true, true, ...$args);
+    return Tags::__callStatic("fieldset", $args);
 }
 
 /**
  * footer function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param mixed|mixed ...$args
+ * @return string
  */
-function footer(...$args): void
+function footer(mixed ...$args): string
 {
-    Template::createTag("footer", true, true, ...$args);
+    return Tags::__callStatic("footer", $args);
 }
 
 /**
  * form function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function form(...$args): void
+function form(mixed ...$args): string
 {
-    Template::createTag("form", true, true, ...$args);
+    return Tags::__callStatic("form", $args);
 }
 
 /**
  * header function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function header(...$args): void
+function header(mixed ...$args): string
 {
-    Template::createTag("header", true, true, ...$args);
+    return Tags::__callStatic("header", $args);
 }
 
 /**
  * hgroup function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function hgroup(...$args): void
+function hgroup(mixed ...$args): string
 {
-    Template::createTag("hgroup", true, true, ...$args);
+    return Tags::__callStatic("hgroup", $args);
 }
 
 /**
  * hr function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function hr(array $attr = []): void
+function hr(array $attr = []): string
 {
-    Template::createTag("hr", false, true, $attr);
+    return Tags::__callStatic("hr", [$attr]);
 }
 
 /**
  * i function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function i(...$args): void
+function i(mixed ...$args): string
 {
-    Template::createTag("i", true, true, ...$args);
+    return Tags::__callStatic("i", $args);
 }
 
 /**
  * iframe function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function iframe(array $attr = []): void
+function iframe(array $attr = []): string
 {
-    Template::createTag("iframe", true, true, $attr);
+    return Tags::__callStatic("iframe", [$attr]);
 }
 
 /**
  * input function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function input(array $attr = []): void
+function input(array $attr = []): string
 {
-    Template::createTag("input", false, true, $attr);
+    return Tags::__callStatic("input", [$attr]);
 }
 
 /**
  * label function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function label(...$args): void
+function label(mixed ...$args): string
 {
-    Template::createTag("label", true, true, ...$args);
+    return Tags::__callStatic("label", $args);
 }
 
 /**
  * ins function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function ins(...$args): void
+function ins(mixed ...$args): string
 {
-    Template::createTag("ins", true, true, ...$args);
+    return Tags::__callStatic("ins", $args);
 }
 
 /**
  * kbd function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function kbd(...$args): void
+function kbd(mixed ...$args): string
 {
-    Template::createTag("kbd", true, true, ...$args);
+    return Tags::__callStatic("kbd", $args);
 }
 
 /**
  * legend function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function legend(...$args): void
+function legend(mixed ...$args): string
 {
-    Template::createTag("legend", true, true, ...$args);
+    return Tags::__callStatic("legend", $args);
 }
 
 /**
  * li function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function li(...$args): void
+function li(mixed ...$args): string
 {
-    Template::createTag("li", true, true, ...$args);
+    return Tags::__callStatic("li", $args);
 }
 
 /**
  * ul function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function ul(...$args): void
+function ul(mixed ...$args): string
 {
-    Template::createTag("ul", true, true, ...$args);
+    return Tags::__callStatic("ul", $args);
 }
 
 /**
  * main function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function main(...$args): void
+function main(mixed ...$args): string
 {
-    Template::createTag("main", true, true, ...$args);
+    return Tags::__callStatic("main", $args);
 }
 
 /**
  * map function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function map(...$args): void
+function map(mixed ...$args): string
 {
-    Template::createTag("map", true, true, ...$args);
+    return Tags::__callStatic("map", $args);
 }
 
 /**
  * mark function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function mark(...$args): void
+function mark(mixed ...$args): string
 {
-    Template::createTag("mark", true, true, ...$args);
+    return Tags::__callStatic("mark", $args);
 }
 
 /**
  * menu function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function menu(...$args): void
+function menu(mixed ...$args): string
 {
-    Template::createTag("menu", true, true, ...$args);
+    return Tags::__callStatic("menu", $args);
 }
 
 /**
  * meter function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function meter(...$args): void
+function meter(mixed ...$args): string
 {
-    Template::createTag("meter", true, true, ...$args);
+    return Tags::__callStatic("meter", $args);
 }
 
 /**
  * nav function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function nav(...$args): void
+function nav(mixed ...$args): string
 {
-    Template::createTag("nav", true, true, ...$args);
+    return Tags::__callStatic("nav", $args);
 }
 
 /**
  * ol function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function ol(...$args): void
+function ol(mixed ...$args): string
 {
-    Template::createTag("ol", true, true, ...$args);
+    return Tags::__callStatic("ol", $args);
 }
 
 /**
  * noscript function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function noscript(...$args): void
+function noscript(mixed ...$args): string
 {
-    Template::createTag("noscript", true, true, ...$args);
+    return Tags::__callStatic("noscript", $args);
 }
 
 /**
  * object function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function object(...$args): void
+function object(mixed ...$args): string
 {
-    Template::createTag("object", true, true, ...$args);
+    return Tags::__callStatic("object", $args);
 }
 
 /**
  * optgroup function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function optgroup(...$args): void
+function optgroup(mixed ...$args): string
 {
-    Template::createTag("optgroup", true, true, ...$args);
+    return Tags::__callStatic("optgroup", $args);
 }
 
 /**
  * output function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function output(...$args): void
+function output(mixed ...$args): string
 {
-    Template::createTag("output", true, true, ...$args);
+    return Tags::__callStatic("output", $args);
 }
 
 /**
  * p function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function p(...$args): void
+function p(mixed ...$args): string
 {
-    Template::createTag("p", true, true, ...$args);
+    return Tags::__callStatic("p", $args);
 }
 
 /**
  * picture function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function picture(...$args): void
+function picture(mixed ...$args): string
 {
-    Template::createTag("picture", true, true, ...$args);
+    return Tags::__callStatic("picture", $args);
 }
 
 /**
  * source function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function source(array $attr = []): void
+function source(array $attr = []): string
 {
-    Template::createTag("source", false, true, $attr);
+    return Tags::__callStatic("source", [$attr]);
 }
 
 /**
  * portal function (实验性)
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function portal(array $attr = []): void
+function portal(array $attr = []): string
 {
-    Template::createTag("portal", false, true, $attr);
+    return Tags::__callStatic("portal", [$attr]);
 }
 
 /**
  * pre function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function pre(...$args): void
+function pre(mixed ...$args): string
 {
-    Template::createTag("pre", true, true, ...$args);
+    return Tags::__callStatic("pre", $args);
 }
 
 /**
  * progress function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function progress(...$args): void
+function progress(mixed ...$args): string
 {
-    Template::createTag("progress", true, true, ...$args);
+    return Tags::__callStatic("progress", $args);
 }
 
 /**
  * q function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function q(...$args): void
+function q(mixed ...$args): string
 {
-    Template::createTag("q", true, true, ...$args);
+    return Tags::__callStatic("q", $args);
 }
 
 /**
  * rp function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function rp(...$args): void
+function rp(mixed ...$args): string
 {
-    Template::createTag("rp", true, true, ...$args);
+    return Tags::__callStatic("rp", $args);
 }
 
 /**
  * rt function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function rt(...$args): void
+function rt(mixed ...$args): string
 {
-    Template::createTag("rt", true, true, ...$args);
+    return Tags::__callStatic("rt", $args);
 }
 
 /**
  * ruby function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function ruby(...$args): void
+function ruby(mixed ...$args): string
 {
-    Template::createTag("ruby", true, true, ...$args);
+    return Tags::__callStatic("ruby", $args);
 }
 
 /**
  * s function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function s(...$args): void
+function s(mixed ...$args): string
 {
-    Template::createTag("s", true, true, ...$args);
+    return Tags::__callStatic("s", $args);
 }
 
 /**
  * samp function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function samp(...$args): void
+function samp(mixed ...$args): string
 {
-    Template::createTag("samp", true, true, ...$args);
+    return Tags::__callStatic("samp", $args);
 }
 
 /**
  * search function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function search(...$args): void
+function search(mixed ...$args): string
 {
-    Template::createTag("search", true, true, ...$args);
+    return Tags::__callStatic("search", $args);
 }
 
 /**
  * section function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function section(...$args): void
+function section(mixed ...$args): string
 {
-    Template::createTag("section", true, true, ...$args);
+    return Tags::__callStatic("section", $args);
 }
 
 /**
  * select function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function select(...$args): void
+function select(mixed ...$args): string
 {
-    Template::createTag("select", true, true, ...$args);
+    return Tags::__callStatic("select", $args);
 }
 
 /**
  * slot function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function slot(...$args): void
+function slot(mixed ...$args): string
 {
-    Template::createTag("slot", true, true, ...$args);
+    return Tags::__callStatic("slot", $args);
 }
 
 /**
  * small function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function small(...$args): void
+function small(mixed ...$args): string
 {
-    Template::createTag("small", true, true, ...$args);
+    return Tags::__callStatic("small", $args);
 }
 
 /**
  * strong function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function strong(...$args): void
+function strong(mixed ...$args): string
 {
-    Template::createTag("strong", true, true, ...$args);
+    return Tags::__callStatic("strong", $args);
 }
 
 /**
  * style function
  *
  * @param array $css 数组
- * @return void
+ * @return string
  */
-function style(array $css): void
+function style(array $css): string
 {
-    echo "<style>" . Template::arrayToCss($css) . "</style>";
+    return "<style>" . Tags::arrayToCss($css) . "</style>";
 }
 
 /**
  * sub function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function sub(...$args): void
+function sub(mixed ...$args): string
 {
-    Template::createTag("sub", true, true, ...$args);
+    return Tags::__callStatic("sub", $args);
 }
 
 /**
  * sup function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function sup(...$args): void
+function sup(mixed ...$args): string
 {
-    Template::createTag("sup", true, true, ...$args);
+    return Tags::__callStatic("sup", $args);
 }
 
 /**
  * tbody function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function tbody(...$args): void
+function tbody(mixed ...$args): string
 {
-    Template::createTag("tbody", true, true, ...$args);
+    return Tags::__callStatic("tbody", $args);
 }
 
 /**
  * td function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function td(...$args): void
+function td(mixed ...$args): string
 {
-    Template::createTag("td", true, true, ...$args);
+    return Tags::__callStatic("td", $args);
 }
 
 /**
  * template function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function template(...$args): void
+function template(mixed ...$args): string
 {
-    Template::createTag("template", true, true, ...$args);
+    return Tags::__callStatic("template", $args);
 }
 
 /**
  * textarea function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function textarea(...$args): void
+function textarea(mixed ...$args): string
 {
-    Template::createTag("textarea", true, true, ...$args);
+    return Tags::__callStatic("textarea", $args);
 }
 
 /**
  * tfoot function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function tfoot(...$args): void
+function tfoot(mixed ...$args): string
 {
-    Template::createTag("tfoot", true, true, ...$args);
+    return Tags::__callStatic("tfoot", $args);
 }
 
 /**
  * th function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function th(...$args): void
+function th(mixed ...$args): string
 {
-    Template::createTag("th", true, true, ...$args);
+    return Tags::__callStatic("th", $args);
 }
 
 /**
  * thead function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function thead(...$args): void
+function thead(mixed ...$args): string
 {
-    Template::createTag("thead", true, true, ...$args);
+    return Tags::__callStatic("thead", $args);
 }
 
 /**
  * time function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function time(...$args): void
+function time(mixed ...$args): string
 {
-    Template::createTag("time", true, true, ...$args);
+    return Tags::__callStatic("time", $args);
 }
 
 /**
  * tr function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function tr(...$args): void
+function tr(mixed ...$args): string
 {
-    Template::createTag("tr", true, true, ...$args);
+    return Tags::__callStatic("tr", $args);
 }
 
 /**
  * track function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function track(...$args): void
+function track(mixed ...$args): string
 {
-    Template::createTag("track", true, true, ...$args);
+    return Tags::__callStatic("track", $args);
 }
 
 /**
  * u function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function u(...$args): void
+function u(mixed ...$args): string
 {
-    Template::createTag("u", true, true, ...$args);
+    return Tags::__callStatic("u", $args);
 }
 
 /**
  * video function
  *
- * @param [string|array|callable] ...$args
- * @return void
+ * @param [mixed] ...$args
+ * @return string
  */
-function video(...$args): void
+function video(mixed ...$args): string
 {
-    Template::createTag("video", true, true, ...$args);
+    return Tags::__callStatic("video", $args);
 }
 
 /**
  * wbr function
  *
  * @param array $attr
- * @return void
+ * @return string
  */
-function wbr($attr = []): void
+function wbr($attr = []): string
 {
-    Template::createTag("wbr", false, true, $attr);
+    return Tags::__callStatic("wbr", [$attr]);
 }
