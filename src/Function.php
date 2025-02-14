@@ -21,12 +21,11 @@ function hsc(int|string $text): string
  * html标签 function
  *
  * @param mixed ...$args
- * @return void
+ * @return string
  */
-function html(mixed ...$args): void
+function html(mixed ...$args): string
 {
-    echo "<!DOCTYPE html>";
-    echo Tags::__callStatic("html", $args);
+    return "<!DOCTYPE html>" . Tags::__callStatic("html", $args);
 }
 
 /**

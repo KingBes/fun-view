@@ -8,12 +8,8 @@ use Kingbes\FunView\Tool;
 
 class Tags
 {
-    /**
-     * 单标签 variable
-     *
-     * @var array
-     */
-    protected array $single_tags = [
+    // 单标签列表
+    protected const SINGLE_TAGS = [
         "br",
         "hr",
         "img",
@@ -29,90 +25,79 @@ class Tags
         "wbr"
     ];
 
-    /**
-     * 标签类型 variable
-     *
-     * @var boolean
-     */
-    protected bool $tagType = false;
+    private string $name;
+    private bool $isSingleTag;
 
     /**
-     * 构造函数 function
-     *
-     * @param string $name
-     * @return void
+     * 构造函数初始化标签名称和类型
      */
-    public function __construct(protected string $name)
+    public function __construct(string $name)
     {
-        if (in_array($name, $this->single_tags)) {
-            $this->tagType = true;
-        }
+        $this->name = $name;
+        $this->isSingleTag = in_array($name, self::SINGLE_TAGS);
     }
 
     /**
-     * 创建 function
-     *
-     * @param mixed ...$args
-     * @return string
+     * 创建HTML标签
      */
-    public function create(mixed ...$args): string
+    public function create(...$args): string
     {
-        $text = '';
-        $attr = '';
-        $func = '';
-        foreach ($args as $key => $value) {
-            if (is_callable($value)) {
-                $func .= $value();
-            } elseif (is_array($value)) {
-                $attr .= $this->getAttr($value);
+        [$attributes, $innerContent] = $this->parseArgs($args);
+
+        if ($this->isSingleTag) {
+            return "<{$this->name}{$attributes}/>";
+        }
+
+        return "<{$this->name}{$attributes}>{$innerContent}</{$this->name}>";
+    }
+
+    /**
+     * 解析传入参数
+     */
+    private function parseArgs(array $args): array
+    {
+        $attributes = '';
+        $innerContent = '';
+
+        foreach ($args as $arg) {
+            if (is_callable($arg)) {
+                $innerContent .= $arg();
+            } elseif (is_array($arg)) {
+                $attributes .= $this->buildAttributes($arg);
             } else {
-                $text .= $value;
+                $innerContent .= $arg;
             }
         }
-        if ($this->tagType) {
-            return "<{$this->name}{$attr}/>";
-        } else {
-            return "<{$this->name}{$attr}>{$text}{$func}</{$this->name}>";
-        }
+
+        return [$attributes, $innerContent];
     }
 
     /**
-     * 属性 function
-     *
-     * @param array $attr
-     * @return string
+     * 构建属性字符串
      */
-    protected function getAttr(array $attr): string
+    private function buildAttributes(array $attr): string
     {
-        $str = '';
+        $attributeStrings = [];
         foreach ($attr as $key => $value) {
-            $str .= " $key=\"$value\"";
+            $attributeStrings[] = "$key=\"$value\"";
         }
-        return $str;
+        return ' ' . implode(' ', $attributeStrings);
     }
 
     /**
-     * 数组转css字符串 function
-     *
-     * @param array $arr
-     * @return string
-     */
-    public static function arrayToCss(array $arr): string
-    {
-        $Tool = new Tool;
-        return preg_replace('/}+/', '}', substr($Tool->arrToCss($arr), 1));
-    }
-
-    /**
-     * 方法重载 function
-     *
-     * @param string $name
-     * @param array $arguments
-     * @return string
+     * 静态方法调用创建实例并生成标签
      */
     public static function __callStatic(string $name, array $arguments): string
     {
-        $tag = new Tags($name);
-        return $tag->create(...$arguments);
+        return (new self($name))->create(...$arguments);
+    }
+
+    /**
+     * 将数组转换为CSS字符串
+     */
+    public static function arrayToCss(array $arr): string
+    {
+        $css = (new Tool)->arrToCss($arr);
+        return preg_replace('/}+/', '}', substr($css, 1));
     }
 }

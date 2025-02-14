@@ -21,12 +21,14 @@ $tpl = new Template([
     "view_dir" =>  __DIR__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR
 ]);
 
-return $tpl->fetch("index", ["num" => 3]);
+echo $tpl->fetch("index", ["num" => 3]);
 ```
 
 index.php 模板：
 
 ```php
+<?php
+
 use function Kingbes\FunView\{
     p,
     hsc,
@@ -43,7 +45,7 @@ use function Kingbes\FunView\{
     script
 };
 
-html(
+$view = html(
     head(
         meta(["charset" => "UTF-8"]),
         meta([
@@ -77,6 +79,8 @@ html(
         script("alert('hello world')")
     )
 );
+// 显示模板
+echo $view;
 ```
 
 结果:
@@ -113,3 +117,38 @@ html(
 </html>
 ```
 
+## 助手
+
+```php
+use function Kingbes\FunView\hsc;
+
+/**
+ * 安全输出,htmlspecialchars用法 function
+ *
+ * @param integer|string $text
+ * @return string
+ */
+function hsc(int|string $text): string
+```
+
+## 自定义标签
+
+```php
+
+use Kingbes\FunView\Tags;
+
+function myview(mixed ...$args): string
+{
+    return Tags::__callStatic("myview", $args);
+}
+// <myview></myview> 标签
+```
+
+```php
+
+function diyview($str):string
+{
+    return "<div id='diyview'>".$str."</div>";
+}
+
+```
