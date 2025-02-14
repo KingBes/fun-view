@@ -1,6 +1,7 @@
 {
     "name": "kingbes/fun-view",
     "description": "函 数 式 模 板 引 擎 。Function View Template.",
+    "type": "library",
     "keywords": [
         "php",
         "template",
