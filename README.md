@@ -40,6 +40,62 @@ $config = [
 $tpl = new \Kingbes\FunView\Template($config);
 ```
 
+## 模板布局
+
+`app/index/view/user/add.php`模板文件，`app/index/view/layout.php`布局模板文件，输出替换变量`__CONTENT__`,如果布局模板文件不存在则直接输出模板内容。布局模板文件可以递归到模板文件统计目录到模板目录`view_dir`同级目录。
+
+```php
+<?php
+
+// app/index/view/layout.php
+use function Kingbes\FunView\{
+    html,
+    head,
+    body,
+    title,
+    meta,
+    style,
+    hsc
+};
+
+$view = html(
+    head(
+        meta(["charset" => "UTF-8"]),
+        meta([
+            "name" => "viewport",
+            "content" => "width=device-width, initial-scale=1.0"
+        ]),
+        title(hsc($title ?? "")),
+        style([
+            "p" => [
+                "color" => "blue",
+            ]
+        ])
+    ),
+    body($__CONTENT__)
+);
+
+echo $view;
+
+```
+
+```php
+<?php
+// app/index/view/user/add.php
+use function Kingbes\FunView\{
+    p,
+    h1,
+    div,
+};
+
+$view = div(
+    p("hello world"),
+    h1("hello world"));
+
+echo $view;
+
+```
+
 ### 示例
 
 ```php
