@@ -2,10 +2,42 @@
 
 💎 函 数 式 模 板 引 擎 。Function View Template.
 
-composer
+## 介绍
+
+> FunView 是一个函数式模板引擎，它可以让你在 PHP 中使用函数式编程的方式来编写模板。
+
+### 特点
+
+- 支持布局模板；
+- 支持函数式编程；
+- 系统变量无需赋值直接输出；
+
+### 要求
+
+- PHP >= 8.1
+
+## 安装配置
+
+### 安装
+
+通过`composer`安装即可
 
 ```shell
 composer require kingbes/fun-view
+```
+
+## 配置
+
+```php
+$config = [
+    // 模板目录
+    'view_dir'      =>  './views/',
+    // 模板布局
+    'layout_name'   =>  'layout', //布局模板入口文件名称
+    'layout_item'   =>  '__CONTENT__', //布局模板内容变量标识
+];
+
+$tpl = new \Kingbes\FunView\Template($config);
 ```
 
 ### 示例

@@ -39,24 +39,30 @@ class FunView implements View
     {
         $request = request();
         $plugin = $plugin === null ? ($request->plugin ?? '') : $plugin;
-        
         $app = $app === null ? ($request->app ?? '') : $app;
+        $configPrefix = $plugin ? "plugin.$plugin." : '';
         $baseViewPath = $plugin ? base_path() . "/plugin/$plugin/app" : app_path();
-        $__template_path__ = $app === '' ? "$baseViewPath/view/$template.php" : "$baseViewPath/$app/view/$template.php";
-
+        if ($template[0] === '/') {
+            if (strpos($template, '/view/') !== false) {
+                [$viewPath, $template] = explode('/view/', $template, 2);
+                $viewPath = base_path("$viewPath/view/");
+            } else {
+                $viewPath = base_path() . dirname($template) . '/';
+                $template = basename($template);
+            }
+        } else {
+            $viewPath = $app === '' ? "$baseViewPath/view/" : "$baseViewPath/$app/view/";
+        }
+        $defaultOptions = [
+            'view_dir' => $viewPath,
+            'layout_name' => config("{$configPrefix}view.options.layout_name", 'layout'),
+            'layout_item' => config("{$configPrefix}view.options.layout_item", '__CONTENT__'),
+        ];
+        $options = array_merge($defaultOptions, config("{$configPrefix}view.options", []));
+        $view = new Template($options);
         if (isset($request->_view_vars)) {
-            extract((array)$request->_view_vars);
+            $vars = array_merge((array)$request->_view_vars, $vars);
         }
-        extract($vars);
-        ob_start();
-        // Try to include php file.
-        try {
-            include $__template_path__;
-        } catch (Throwable $e) {
-            ob_end_clean();
-            throw $e;
-        }
-
-        return ob_get_clean();
+        return $view->fetch($template, $vars);
     }
 }
